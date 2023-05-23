@@ -36,35 +36,19 @@ st.write("\n\n")
 # Sous-titre centré
 st.subheader('📊 Boxplots and distribution of numerical variables')
 
-# Création des figures pour les boxplots
-fig, axs = plt.subplots(ncols=2, nrows=5, figsize=(7, 12))
-index = 0
-axs = axs.flatten()
+
 for k, v in df[numerical_col].items():
-    sns.boxplot(y=k, data=df[numerical_col], ax=axs[index])
-    index += 1
-plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+    sns.boxplot(y=k, data=df[numerical_col], ax=axs[0])
+    sns.distplot(v, ax=axs[1], kde_kws={'bw_method': 0.1})
 
-# Affichage de la figure centrée
-st.pyplot(fig)
+    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
 
-# Ajout d'espaces
-st.write("\n\n")
+    # Affichage de la figure centrée
+    st.pyplot(fig)
 
-# Création des figures pour les distributions
-fig, axs = plt.subplots(ncols=2, nrows=5, figsize=(7, 12))
-index = 0
-axs = axs.flatten()
-for k, v in df[numerical_col].items():
-    sns.distplot(v, ax=axs[index], kde_kws={'bw_method': 0.1})
-    index += 1
-plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
-
-# Affichage de la figure centrée
-st.pyplot(fig)
-
-# Ajout d'espaces
-st.write("\n\n")
+    # Ajout d'espaces
+    st.write("\n\n")
 
 # Sous-titre centré
 st.subheader(

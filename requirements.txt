@@ -6,3 +6,4 @@ prince==0.10.4
 scikit_learn==1.2.0
 seaborn==0.12.2
 streamlit==1.18.1
+quantile_forest==1.1.2
