@@ -14,7 +14,11 @@ df = pd.read_csv('data/possum.csv')
 df = df.drop('case', axis=1)
 df = df.dropna()
 
+df = df.reset_index(drop=True)
+
 model_set = pd.read_csv('data/df.csv')
+
+st.text(f"{len(model_set)}, {len(df)}")
 
 sexes = df['sex'].unique().tolist()
 sites = df['site'].unique().tolist()
@@ -26,21 +30,22 @@ with col1:
 with col2:
     site = st.selectbox("choose the pop : ", sites)
 
-ind = df[(df['sex'] == sex) & (df['site'] == site)].index
+df_bis = df[(df['sex'] == sex) & (df['site'] == site)].index.tolist()
 
-df = df.loc[ind]
+try:
 
-filter_set = model_set.loc[ind]
+    ind = df_bis
 
-alpha = 100 - prc
+    df = df.loc[ind]
 
-alpha = alpha / 100
+    filter_set = model_set.loc[ind]
 
-X = filter_set.drop('age', axis=1)
-y = filter_set['age']
+    alpha = 100 - prc
 
+    alpha = alpha / 100
 
-if True:
+    X = filter_set.drop('age', axis=1)
+    y = filter_set['age']
 
     preds = qrf.predict(X, [alpha/2, 0.5, 1-alpha/2])
     preds_2 = rf.predict(X)
@@ -59,3 +64,7 @@ if True:
                       max_value=len(X)-1, value=0)
 
     st.table(df.iloc[coord])
+
+except:
+
+    st.text("no data for this selection")

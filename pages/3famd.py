@@ -69,7 +69,7 @@ def col_contrib():
             ix = np.where(group == g)
             key = [k for k, v in cdict.items() if v == g]
             ax.scatter(
-                scatter_x.iloc[ix[0]], scatter_y.iloc[ix[0]], label=key[0], alpha=0.3)
+                scatter_x.iloc[ix[0]], scatter_y.iloc[ix[0]], label=key[0], alpha=0.9, s=200)
         ax.set_xlabel(f"Component {comp_cons}")
         ax.set_ylabel(f"Component {comp_cons+1}")
         ax.set_title(

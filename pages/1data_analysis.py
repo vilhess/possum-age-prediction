@@ -36,19 +36,21 @@ st.write("\n\n")
 # Sous-titre centré
 st.subheader('📊 Boxplots and distribution of numerical variables')
 
+# Affichage des boxplots et des distributions pour une variable numérique séléctionnée
 
-for k, v in df[numerical_col].items():
-    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
-    sns.boxplot(y=k, data=df[numerical_col], ax=axs[0])
-    sns.distplot(v, ax=axs[1], kde_kws={'bw_method': 0.1})
+var = st.selectbox('Select a numerical variable', numerical_col)
 
-    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+sns.boxplot(data=df[var], ax=axs[0])
+sns.distplot(df[var], ax=axs[1], kde_kws={'bw_method': 0.1})
 
-    # Affichage de la figure centrée
-    st.pyplot(fig)
+plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
 
-    # Ajout d'espaces
-    st.write("\n\n")
+# Affichage de la figure centrée
+st.pyplot(fig)
+
+# Ajout d'espaces
+st.write("\n\n")
 
 # Sous-titre centré
 st.subheader(
