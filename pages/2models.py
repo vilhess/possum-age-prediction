@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 rf = pickle.load(open('saved_models/rf.pkl', 'rb'))
 qrf = pickle.load(open('saved_models/qrf.pkl', 'rb'))
@@ -38,7 +39,8 @@ alpha = alpha / 100
 X = filter_set.drop('age', axis=1)
 y = filter_set['age']
 
-if len(filter_set) > 0:
+
+if True:
 
     preds = qrf.predict(X, [alpha/2, 0.5, 1-alpha/2])
     preds_2 = rf.predict(X)
@@ -57,6 +59,3 @@ if len(filter_set) > 0:
                       max_value=len(X)-1, value=0)
 
     st.table(df.iloc[coord])
-
-else:
-    st.text('No data for this combination')
