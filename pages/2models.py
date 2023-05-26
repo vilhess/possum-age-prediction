@@ -18,7 +18,6 @@ df = df.reset_index(drop=True)
 
 model_set = pd.read_csv('data/df.csv')
 
-st.text(f"{len(model_set)}, {len(df)}")
 
 sexes = df['sex'].unique().tolist()
 sites = df['site'].unique().tolist()
